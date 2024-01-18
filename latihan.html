@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Oswald:wght@500&family=Rock+Salt&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans&family=Roboto+Condensed:ital@1&display=swap" rel="stylesheet">
+    <title>Undangan</title>
+    <style>
+        :root {
+            --light-bg-color: #fff;
+            --light-text-color: #000;
+            --dark-bg-color: #333;
+            --dark-text-color: #fff;
+        }
+
+        body {
+            font-size: 16px;
+        }
+
+        .header img {
+            width: 100%;
+            height: auto; 
+        }
+
+        .image-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .countdown-container {
+            font-size: 14px;
+        }
+
+        @media (max-width: 430px) {
+    
+            .header {
+                height: 35vh;
+            }
+
+            .countdown-container {
+                font-size: 12px;
+            }
+
+            .overlay-text {
+                top: 40%;
+                font-size: 40px;
+            }
+        }
+
+        html {
+            background-color: var(--light-bg-color);
+            color: var(--light-text-color);
+            transition: background-color 0.5s ease, color 0.5s ease;
+        }
+
+        html.dark-mode {
+            background-color: var(--dark-bg-color);
+            color: var(--dark-text-color);
+        }
+
+        body {
+            background-size: cover;
+            opacity: 0.5;
+            transition: opacity 0.5s ease;
+        }
+
+        button {
+            padding: 20px;
+            margin: auto;
+            border-radius: 100%;
+            background-image: url('images/moon-39.png');
+            background-size: cover;
+            width: 10px;
+        }
+
+        button.moon {
+            background-image: url('images/sun.png');
+        }
+
+        .header {
+            text-align: center;
+            font-size: 50px;
+            /* background-color: yellow; */
+            max-width: 100%;
+            height: 70vh;
+            /* background-image: url('images/quran-background.jpg'); */
+        }
+
+        .header img {
+            height: 100%;
+            width: 100%;
+        }
+
+        .image-container {
+            position: relative;
+            display: inline-block;
+            justify-content: center;
+        }
+
+        .image-container img {
+            display: block;
+            width: 100%;
+            object-fit: contain;
+        }
+
+        .overlay-text {
+            position: absolute;
+            top: 30%;
+            left: 50%; 
+            transform: translate(-50%, -50%); 
+            font-family: 'Dancing Script', cursive;
+            color: #fff; 
+            padding: 10px 20px; 
+            font-size: 50px; 
+            text-align: center;
+        }
+
+        .countdown-container {
+            font-weight: bold;
+            font-size: 20px;
+            text-align: center;
+            font-family: 'Josefin Sans', sans-serif;
+            height: 70vh;
+        }
+
+
+    </style>
+</head>
+<body>
+    <button id="darkModeToggle" aria-label="Toggle Dark Mode" tabindex="0"></button>
+    <div class="image-container">
+        <img src="images/quran-background.jpg" alt="Background Image of Quran">
+        <div class="overlay-text">Eid al-Fitr<br>Venue</div>
+    </div>
+    <div class="countdown-container">
+        <h2>We are inviting you to our Venue!</h2>
+        <h2>Days until Eid Al-Fitr</h2>
+        <div id="countdown" class="countdown" role="timer" aria-label="Countdown Timer"></div>
+    </div>
+    <div class="closing-container">
+    </div>
+    <script>
+        function setCookie(name, value, dayToLive){
+            const date = new Date()
+            date.setTime(date.getTime() + dayToLive * 24 * 60 * 60* 1000);
+            const expires = "expires=" + date.toUTCString();
+            document.cookie = `${name}=${value}; ${expires}; path=/`;
+        }
+
+        function deleteCookie(name){
+            setCookie(name, null, null);
+        }
+
+        function getCookie(name){
+            const cookieDecoded = decodeURIComponent(document.cookie);
+            const cookieArr = cookieDecoded.split("; ");
+            let result = null;
+
+            cookieArr.forEach(element => {
+                if (element.indexOf(name) === 0){
+                    result = element.substring(name.length + 1);
+                }
+            })
+
+            return result;
+            
+        }
+
+        function toggleDarkMode() {
+            const darkModeEnabled = getCookie();
+        }
+
+        const html = document.documentElement;
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const button = document.querySelector('button');
+
+            const darkModeEnabled = getCookie('darkMode');
+            if (darkModeEnabled === 'true') {
+                html.classList.add('dark-mode');
+                button.classList.add('moon');
+            }
+
+            button.addEventListener('click', () => {
+                html.classList.toggle('dark-mode');
+                button.classList.toggle('moon');
+
+                const isDarkModeEnabled = html.classList.contains('dark-mode');
+                setCookie('darkMode', isDarkModeEnabled.toString(), 30);
+            });
+
+            countdown();
+        });
+
+        function countdown() {
+            var x = setInterval(function() {
+            var countDownDate = new Date("April 9, 2024 00:00:00").getTime();
+            var now = new Date().getTime();
+            var distance = countDownDate - now;
+            var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            document.getElementById("countdown").innerHTML = days + "d " + hours + "h "
+            + minutes + "m " + seconds + "s ";
+            if (distance < 0) {
+                clearInterval(x);
+                document.getElementById("countdown").innerHTML = "EXPIRED";}}, 1000);
+        }
+        window.onload = countdown;
+    </script>
+</body>
+</html>
