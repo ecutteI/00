@@ -8,6 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Acme&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans&family=Roboto+Condensed:ital@1&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Acme&family=Montserrat:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Acme&family=Cairo:wght@600&family=Montserrat:wght@700&display=swap" rel="stylesheet">
     <title>Undangan</title>
     <style>
         :root {
@@ -59,7 +60,7 @@
             font-weight: bold;
             font-size: 20px;
             text-align: center;
-            font-family: 'Josefin Sans', sans-serif;
+            font-family: 'Cairo', sans-serif;
             height: 70vh;
             z-index: 1;
         }
@@ -131,6 +132,13 @@
             text-align: center;
             background: #393e46;
         }
+
+        .countdown-item {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+        }
     </style>
 </head>
 <body>
@@ -147,9 +155,27 @@
     <div class="middle-container">
         <div class="background-box"></div>
         <div class="countdown-container">
-            <div class="overlay-text-4">Days until Eid Al-Fitr</div> 
             <br>
-            <div id="countdown" class="countdown" role="timer" aria-label="Countdown Timer"></div>
+            <div class="overlay-text-4">Days until the Event</div> 
+            <div id="countdown" class="countdown" role="timer" aria-label="Countdown Timer" style="display: flex; justify-content: space-around;">
+                <div style="margin: 15px;">
+                    <span id="days" class="countdown-item" style="font-size: 40px;"></span>
+                    <div style="font-size: 10px;">D A Y S</div>
+                </div>
+                <div style="margin: 15px;">
+                    <span id="hours" class="countdown-item" style="font-size: 40px;"></span>
+                    <div style="font-size: 10px;">H R S</div>
+                </div>
+                <div style="margin: 15px;">
+                    <span id="minutes" class="countdown-item" style="font-size: 40px;"></span>
+                    <div style="font-size: 10px;">M I N S</div>
+                </div>
+                <div style="margin: 15px;">
+                    <span id="seconds" class="countdown-item" style="font-size: 40px;"></span>
+                    <div style="font-size: 10px;">S E C S</div>
+                </div>
+            </div>
+            
         </div>
     </div>
     <script>
@@ -210,8 +236,10 @@
             var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
             var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
             var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-            document.getElementById("countdown").innerHTML = days + "d " + hours + "h "
-            + minutes + "m " + seconds + "s ";
+            document.getElementById("days").innerHTML = days;
+            document.getElementById("hours").innerHTML = hours;
+            document.getElementById("minutes").innerHTML = minutes;
+            document.getElementById("seconds").innerHTML = seconds;
             if (distance < 0) {
                 clearInterval(x);
                 document.getElementById("countdown").innerHTML = "EXPIRED";}}, 1000);
