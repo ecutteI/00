@@ -5,56 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Oswald:wght@500&family=Rock+Salt&display=swap" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Acme&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans&family=Roboto+Condensed:ital@1&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Acme&family=Montserrat:wght@700&display=swap" rel="stylesheet">
     <title>Undangan</title>
     <style>
         :root {
-            --light-bg-color: #fff;
+            --light-bg-color: #EEEEEE;
             --light-text-color: #000;
-            --dark-bg-color: #333;
+            --dark-bg-color: #222831;
             --dark-text-color: #fff;
         }
 
-        body {
-            font-size: 16px;
-        }
-
-        .header img {
-            width: 100%;
-            height: auto; 
-        }
-
-        .image-container {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .countdown-container {
-            font-size: 14px;
-        }
-
-        @media (max-width: 430px) {
-    
-            .header {
-                height: 35vh;
-            }
-
-            .countdown-container {
-                font-size: 12px;
-            }
-
-            .overlay-text {
-                top: 40%;
-                font-size: 40px;
-            }
-        }
-
         html {
-            background-color: var(--light-bg-color);
             color: var(--light-text-color);
             transition: background-color 0.5s ease, color 0.5s ease;
         }
@@ -66,59 +29,30 @@
 
         body {
             background-size: cover;
-            opacity: 0.5;
             transition: opacity 0.5s ease;
         }
 
         button {
             padding: 20px;
-            margin: auto;
+            left: 49.5%;
             border-radius: 100%;
             background-image: url('images/moon-39.png');
             background-size: cover;
-            width: 10px;
+            position: absolute;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1;
         }
 
         button.moon {
             background-image: url('images/sun.png');
         }
 
-        .header {
-            text-align: center;
-            font-size: 50px;
-            /* background-color: yellow; */
-            max-width: 100%;
-            height: 70vh;
-            /* background-image: url('images/quran-background.jpg'); */
-        }
-
-        .header img {
-            height: 100%;
-            width: 100%;
-        }
-
-        .image-container {
+        .middle-container {
             position: relative;
-            display: inline-block;
+            display: flex;
             justify-content: center;
-        }
-
-        .image-container img {
-            display: block;
-            width: 100%;
-            object-fit: contain;
-        }
-
-        .overlay-text {
-            position: absolute;
-            top: 30%;
-            left: 50%; 
-            transform: translate(-50%, -50%); 
-            font-family: 'Dancing Script', cursive;
-            color: #fff; 
-            padding: 10px 20px; 
-            font-size: 50px; 
-            text-align: center;
+            align-items: center;
         }
 
         .countdown-container {
@@ -127,23 +61,96 @@
             text-align: center;
             font-family: 'Josefin Sans', sans-serif;
             height: 70vh;
+            z-index: 1;
         }
 
+        .header-container {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
 
+        .image-container {
+            width: 414px;
+            max-height: 500px;
+            text-align: center;
+        }
+
+        .overlay-text-1 {
+            position: absolute;
+            top: 26%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-family: 'Montserrat', sans-serif;
+            color: #026667;
+            padding: 10px 20px;
+            font-size: 15px;
+            text-align: center;
+        }
+
+        .overlay-text-2 {
+            position: absolute;
+            top: 35%;
+            left: 50%; 
+            transform: translate(-50%, -50%); 
+            font-family: 'Acme', sans-serif;
+            color: #394E28; 
+            padding: 10px 20px; 
+            font-size: 45px; 
+            text-align: center;
+        }
+
+        .overlay-text-3 {
+            position: absolute;
+            top: 45%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-family: 'Montserrat', sans-serif;
+            color: #1C2311;
+            padding: 10px 20px;
+            font-size: 12px;
+            text-align: center;
+        }
+        
+        .fading-box {
+            position: absolute;
+            bottom: 0%;
+            width: 414px;
+            height: 100px;
+            text-align: center;
+            background: rgb(253,225,150);
+            background: linear-gradient(180deg, rgba(253,225,150,1) 5%, rgba(57,62,70,1) 100%);
+        }
+        
+        .background-box {
+            position: absolute;
+            bottom: 12.2%;
+            width: 414px;
+            height: 400px;
+            text-align: center;
+            background: #393e46;
+        }
     </style>
 </head>
 <body>
-    <button id="darkModeToggle" aria-label="Toggle Dark Mode" tabindex="0"></button>
-    <div class="image-container">
-        <img src="images/quran-background.jpg" alt="Background Image of Quran">
-        <div class="overlay-text">Eid al-Fitr<br>Venue</div>
+    <button id="darkModeToggle" aria-label="Toggle Dark Mode"></button>
+    <div class="header-container">
+        <div class="image-container">
+            <img src="images/background.png" alt="">
+            <div class="fading-box"></div>
+        </div>
+        <div class="overlay-text-1">JOIN US TO CELEBRATE</div>
+        <div class="overlay-text-2">EID AL-FITR</div>
+        <div class="overlay-text-3">Let's celebrate the end of Ramadan <br> and the blessings of Eid together!</div>
     </div>
-    <div class="countdown-container">
-        <h2>We are inviting you to our Venue!</h2>
-        <h2>Days until Eid Al-Fitr</h2>
-        <div id="countdown" class="countdown" role="timer" aria-label="Countdown Timer"></div>
-    </div>
-    <div class="closing-container">
+    <div class="middle-container">
+        <div class="background-box"></div>
+        <div class="countdown-container">
+            <div class="overlay-text-4">Days until Eid Al-Fitr</div> 
+            <br>
+            <div id="countdown" class="countdown" role="timer" aria-label="Countdown Timer"></div>
+        </div>
     </div>
     <script>
         function setCookie(name, value, dayToLive){
@@ -170,10 +177,6 @@
 
             return result;
             
-        }
-
-        function toggleDarkMode() {
-            const darkModeEnabled = getCookie();
         }
 
         const html = document.documentElement;
