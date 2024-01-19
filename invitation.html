@@ -14,8 +14,10 @@
         :root {
             --light-bg-color: #EEEEEE;
             --light-text-color: #000;
+            --light-box-color : #F0F0F0;
             --dark-bg-color: #222831;
             --dark-text-color: #fff;
+            --dark-box-color: #393e46;
         }
 
         html {
@@ -121,7 +123,13 @@
             height: 100px;
             text-align: center;
             background: rgb(253,225,150);
-            background: linear-gradient(180deg, rgba(253,225,150,1) 5%, rgba(57,62,70,1) 100%);
+            background: linear-gradient(180deg, rgba(253,225,150,1) 0%, rgba(240,240,240,1) 100%);
+            transition: 0.5s ease, color 0.5s ease;
+        }
+
+        .dark-fading-box {
+            background: rgb(253,225,150);
+            background: linear-gradient(180deg, rgba(253,225,150,1) 0%, rgba(57,62,70,1) 100%);
         }
         
         .background-box {
@@ -130,7 +138,14 @@
             width: 414px;
             height: 400px;
             text-align: center;
-            background: #393e46;
+            background: #f0f0f0;
+            color: #000;
+            transition: background-color 0.5s ease, color 0.5s ease;
+        }
+
+        .dark-background-box {
+            background-color: var(--dark-box-color);
+            color: var(--dark-text-color);
         }
 
         .countdown-item {
@@ -138,6 +153,32 @@
             flex-direction: column;
             justify-content: space-between;
             align-items: center;
+            /* border-radius: 5px;
+            border-width: 3px;
+            border-style: solid;
+            border-color: #fde196; */
+        }
+
+        .overlay-text-5 {
+            position: absolute;
+            top: 55%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-family: 'Cairo', sans-serif;
+            padding: 10px 20px;
+            font-size: 12px;
+            text-align: center;
+        }
+
+        .overlay-text-6 {
+            position: absolute;
+            top: 64%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-family: 'Cairo', sans-serif;
+            padding: 10px 20px;
+            font-size: 25px;
+            text-align: center;
         }
     </style>
 </head>
@@ -158,26 +199,30 @@
             <br>
             <div class="overlay-text-4">Days until the Event</div> 
             <div id="countdown" class="countdown" role="timer" aria-label="Countdown Timer" style="display: flex; justify-content: space-around;">
-                <div style="margin: 15px;">
+                <div style="margin: 25px;">
                     <span id="days" class="countdown-item" style="font-size: 40px;"></span>
-                    <div style="font-size: 10px;">D A Y S</div>
+                    <div style="font-size: 10px; border-width: 2px;">D A Y S</div>
                 </div>
-                <div style="margin: 15px;">
+                <div style="margin: 25px;">
                     <span id="hours" class="countdown-item" style="font-size: 40px;"></span>
                     <div style="font-size: 10px;">H R S</div>
                 </div>
-                <div style="margin: 15px;">
+                <div style="margin: 25px;">
                     <span id="minutes" class="countdown-item" style="font-size: 40px;"></span>
                     <div style="font-size: 10px;">M I N S</div>
                 </div>
-                <div style="margin: 15px;">
+                <div style="margin: 25px;">
                     <span id="seconds" class="countdown-item" style="font-size: 40px;"></span>
                     <div style="font-size: 10px;">S E C S</div>
                 </div>
             </div>
-            
+        </div>
+        <div class="location-container">
+            <div class="overlay-text-5">Mark your calendar for the 9th of April <br> because were gathering at</div>
+            <div class="overlay-text-6">IGS DORM!</div>
         </div>
     </div>
+    <div class="closing-container"></div>
     <script>
         function setCookie(name, value, dayToLive){
             const date = new Date()
@@ -199,7 +244,7 @@
                 if (element.indexOf(name) === 0){
                     result = element.substring(name.length + 1);
                 }
-            })
+            })  
 
             return result;
             
@@ -214,11 +259,15 @@
             if (darkModeEnabled === 'true') {
                 html.classList.add('dark-mode');
                 button.classList.add('moon');
+                document.querySelector('.background-box').classList.add('dark-background-box')
+                document.querySelector('.fading-box').classList.add('dark-fading-box')
             }
 
             button.addEventListener('click', () => {
                 html.classList.toggle('dark-mode');
                 button.classList.toggle('moon');
+                document.querySelector('.background-box').classList.toggle('dark-background-box');
+                document.querySelector('.fading-box').classList.toggle('dark-fading-box')
 
                 const isDarkModeEnabled = html.classList.contains('dark-mode');
                 setCookie('darkMode', isDarkModeEnabled.toString(), 30);
